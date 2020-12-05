@@ -20,7 +20,6 @@ rules = {
     "eyr" : [2020, 2030],
     "cm" : [150, 193],
     "in" : [59, 76],
-    "hcl" : [],
     "ecl" : ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]
 }
 
@@ -136,7 +135,7 @@ def main():
         if passCheckerTwo(psprt):
             counterTwo +=1
     
-    print(counterOne, counterTwo)
+    print("Passports valid with first criteria: {:0} and with second criteria: {:1} ".format(counterOne, counterTwo))
 
 if __name__ == "__main__":
     main()
