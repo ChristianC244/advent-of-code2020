@@ -38,11 +38,8 @@ def main():
         plane[current] = True
         minSeat = current if current<minSeat else minSeat
     
-    for seat in range(minSeat,maxSeat):
-        if not plane[seat]:
-            print("Your Seat is ",seat)
-    
-
+    [print("Your Seat is ",seat) for seat in range(minSeat,maxSeat) if not plane[seat]]
+            
 
 if __name__ == "__main__":
     main()
