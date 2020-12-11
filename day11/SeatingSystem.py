@@ -1,25 +1,20 @@
 '''
  L =  0 empty seat
- . = 0 floor
- # = -1 occupied seat
+ . = -1 floor
+ # =  1 occupied seat
 '''  
 import copy
 
 def seatsAround(matrix, row, col, partOne):
     # Count how many seats are occupied around the one in matrix[row][col]
-    # focus = matrix[row-1:row+2,col-1:col+2]
-    
+      
     res =0
     seatStatus = matrix[row][col]
 
     if partOne:
-        if (row ==0 or len(matrix)-1) or (col == 0 or len(matrix[0]-1)):
-            matrix = padder(matrix)
-            row += 1
-            col += 1
-        
-        for x in range(row-1,row+2):
-            for y in range(col-1, col+2):
+       
+        for x in range(max(row-1,0), min(row+2,len(matrix))):
+            for y in range(max(col-1,0), min(col+2,len(matrix[0]))):
                 if matrix[x][y]>=0:
                     res += matrix[x][y]
         
@@ -57,20 +52,6 @@ def swapper(matrix):
     return subMatrix
 
 
-def padder(matrix):
-    # Add the frame of zeros to the matrix
-
-    rows = len(matrix)
-    cols = len(matrix[0])
-
-    newMatrix = []
-    newMatrix.append([-1]*(cols+2))
-    for row in matrix:
-        newMatrix.append([-1] + row + [-1])
-    newMatrix.append([-1]*(cols+2))
-
-    return newMatrix
-
 def occupiedSeats(matrix):
     sum=0
     for row in matrix:
@@ -84,10 +65,8 @@ def ruleApplier(matrix,partOne):
     rows = len(matrix)
     cols = len(matrix[0])
     saves = []
-    # ---
+    saves.append(matrix)
     saves.append(copy.deepcopy(matrix))
-    saves.append(copy.deepcopy(matrix))
-    # ---
     flag = True
 
     max = 4 if partOne else 5
@@ -114,9 +93,8 @@ def main():
         seats = file.read().split(sep="\n")
 
     seats = swapper(seats)
-    # print(ruleApplier(seats))
-    # print(ruleApplier(seats, True))
-    print(ruleApplier(seats, False))
+    print(ruleApplier(seats, partOne= True))
+    print(ruleApplier(seats, partOne= False))
 
 
 if __name__ == "__main__":
